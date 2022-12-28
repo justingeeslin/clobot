@@ -1,6 +1,6 @@
 {
-  "name": "steadfast-cow-conduct-az40t",
-  "productName": "steadfast-cow-conduct-az40t",
+  "name": "clobot-ui-electron",
+  "productName": "clobot-ui-electron",
   "description": "My Electron application description",
   "keywords": [],
   "main": "./main.js",

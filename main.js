@@ -1,6 +1,25 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const path = require('path')
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
+async function run_script() {
+  const { stdout, stderr } = await exec('whoami');
+
+  if (stderr) {
+    console.error(`error: ${stderr}`);
+  }
+  console.log(`${stdout}`);
+  return stdout;
+}
+
+
+
+async function handleFileOpen() {
+  const name = await run_script()
+  return name
+}
 
 function createWindow () {
   // Create the browser window.
@@ -23,6 +42,9 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  
+  ipcMain.handle('dialog:openFile', handleFileOpen)
+
   createWindow()
 
   app.on('activate', function () {
