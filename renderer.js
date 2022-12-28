@@ -7,7 +7,22 @@
 const btn = document.getElementById('btn')
 const filePathElement = document.getElementById('filePath')
 
+// Hide things initially
+document.getElementById('inprogress-msg').hidden = true;
+document.getElementById('complete-msg').hidden = true;
+
 btn.addEventListener('click', async () => {
+  // Show the in-progress message
+  document.getElementById('inprogress-msg').hidden = false
   const filePath = await window.electronAPI.openFile()
-  filePathElement.innerText = filePath
+
+  // Show progress for at least .5 seconds
+  window.setTimeout(function() {
+    // Hide the in-progress message
+    document.getElementById('inprogress-msg').hidden = true
+    // Show the complete message
+    document.getElementById('complete-msg').hidden = false
+    filePathElement.innerText = filePath
+  }, 500)
+  
 })
