@@ -5,7 +5,8 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  openFile: () => ipcRenderer.invoke('dialog:openFile')
+  generateCLOBotScript: () => ipcRenderer.invoke('generateCLOBotScript'),
+  handleFileOpen: () => ipcRenderer.invoke('handleFileOpen')
 })
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -19,17 +20,4 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 })
 
-/* BOOTSTRAP TABS */
-const triggerTabList = document.querySelectorAll('#myTab button')
-triggerTabList.forEach(triggerEl => {
-  const tabTrigger = new bootstrap.Tab(triggerEl)
 
-  triggerEl.addEventListener('click', event => {
-    event.preventDefault()
-    tabTrigger.show()
-  })
-})
-
-/* Custom function for nexting */
-const triggerEl = document.querySelector('#myTab button[data-bs-target="#profile"]')
-bootstrap.Tab.getInstance(triggerEl).show() 

@@ -2,9 +2,10 @@
 const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const path = require('path')
 const util = require('util');
+const fs = require('fs');
 const exec = util.promisify(require('child_process').exec);
-
-async function run_script() {
+var mainWindow;
+async function generateCLOBotScript() {
   const { stdout, stderr } = await exec('whoami');
 
   if (stderr) {
@@ -14,16 +15,19 @@ async function run_script() {
   return stdout;
 }
 
-
-
 async function handleFileOpen() {
-  const name = await run_script()
-  return name
+  console.log('choosing a folder..');
+  const { canceled, filePaths } = await dialog.showOpenDialog()
+  if (canceled) {
+    return
+  } else {;
+    return filePaths[0]
+  }
 }
 
 function createWindow () {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -43,7 +47,8 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   
-  ipcMain.handle('dialog:openFile', handleFileOpen)
+  ipcMain.handle('generateCLOBotScript', generateCLOBotScript)
+  ipcMain.handle('handleFileOpen', handleFileOpen)
 
   createWindow()
 

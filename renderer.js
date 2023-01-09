@@ -5,7 +5,7 @@
 // selectively enable features needed in the rendering
 // process.
 const btn = document.getElementById('btn')
-const filePathElement = document.getElementById('filePath')
+
 
 // Hide things initially
 document.getElementById('inprogress-msg').hidden = true;
@@ -14,7 +14,7 @@ document.getElementById('complete-msg').hidden = true;
 btn.addEventListener('click', async () => {
   // Show the in-progress message
   document.getElementById('inprogress-msg').hidden = false
-  const filePath = await window.electronAPI.openFile()
+  const filePath = await window.electronAPI.generateCLOBotScript()
 
   // Show progress for at least .5 seconds
   window.setTimeout(function() {
@@ -25,4 +25,46 @@ btn.addEventListener('click', async () => {
     filePathElement.innerText = filePath
   }, 500)
   
+});
+
+
+const inputFileBlocksFolder = document.getElementById('blocks-folder');
+inputFileBlocksFolder.addEventListener('click', async () => {
+  const chosenDirectory = await window.electronAPI.handleFileOpen();
+  const filePathElement = document.getElementById('blocks-folder-path')
+  filePathElement.innerText = chosenDirectory;
 })
+
+const pythonOutputFileBlocksFolder = document.getElementById('python-output-folder');
+pythonOutputFileBlocksFolder.addEventListener('click', async () => {
+  const chosenDirectory = await window.electronAPI.handleFileOpen();
+  const filePathElement = document.getElementById('python-output-folder-path')
+  filePathElement.innerText = chosenDirectory;
+})
+
+const outputFileBlocksFolder = document.getElementById('output-folder');
+outputFileBlocksFolder.addEventListener('click', async () => {
+  const chosenDirectory = await window.electronAPI.handleFileOpen();
+  const filePathElement = document.getElementById('output-folder-path')
+  filePathElement.innerText = chosenDirectory;
+})
+
+// ipc.on("path:selected", (event, path) => {
+//   chosenPath = path;
+//   console.log("Full path: ", chosenPath[0]);
+// });
+
+/* BOOTSTRAP TABS */
+const triggerTabList = document.querySelectorAll('#myTab button')
+triggerTabList.forEach(triggerEl => {
+  const tabTrigger = new bootstrap.Tab(triggerEl)
+
+  triggerEl.addEventListener('click', event => {
+    event.preventDefault()
+    tabTrigger.show()
+  })
+})
+
+/* Custom function for nexting */
+const triggerEl = document.querySelector('#myTab button[data-bs-target="#profile"]')
+bootstrap.Tab.getInstance(triggerEl).show() 

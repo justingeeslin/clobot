@@ -22,10 +22,26 @@
     </ul>
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-        <h1>Hello World!</h1>
-        We are using Node.js <span id="node-version"></span>,
-        Chromium <span id="chrome-version"></span>,
-        and Electron <span id="electron-version"></span>.
+        <h1>Choose Blocks</h1>
+        <p>Choose the folders containing CLO assets, ex. Garment Blocks, and the folder where the output should be saved.</p>
+
+        <div style="margin:0 auto;">
+          <label style="display:block">Garment Blocks folder:<br>
+            <input type="button" value="Browse…" name="blocks-folder" id="blocks-folder"/>
+            <strong id="blocks-folder-path"></strong>
+          </label>
+
+          <label style="display:block">Python script output folder:<br>
+            <input type="button" value="Browse…" name="python-output-folder" id="python-output-folder"/>
+            <strong id="python-output-folder-path"></strong>
+          </label>
+
+          <label style="display:block">Output folder:<br>
+            <input type="button" value="Browse…" name="output-folder" id="output-folder"/>
+            <strong id="output-folder-path"></strong>
+          </label>
+        </div>
+        
 
         <button class="next">Next</button>
       </div>
