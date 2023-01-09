@@ -8,7 +8,15 @@ var mainWindow;
 
 async function generateCLOBotScript(e, blocksFolderPath, outputFolderPath, scriptOutputFolderPath) {
   console.log('Testing arguments', blocksFolderPath, outputFolderPath, scriptOutputFolderPath);
-  const { stdout, stderr } = await exec('clobot.exe ' + 
+
+  var processName = 'clobot/clobot.exe';
+
+  // When testing on a mac, run the python script directly.
+  if (process.platform === 'darwin') {
+    processName = 'python3 clobot/main.py';
+  }
+
+  const { stdout, stderr } = await exec(processName + ' ' + 
     blocksFolderPath + ' ' +
     outputFolderPath + ' ' +
     scriptOutputFolderPath
