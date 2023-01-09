@@ -14,7 +14,13 @@ document.getElementById('complete-msg').hidden = true;
 btn.addEventListener('click', async () => {
   // Show the in-progress message
   document.getElementById('inprogress-msg').hidden = false
-  const filePath = await window.electronAPI.generateCLOBotScript()
+
+  // Get the folder paths as arguments
+  const blocksFolderPath = document.getElementById('blocks-folder-path').innerText;
+  const outputFolderPath = document.getElementById('output-folder-path').innerText;
+  const scriptOutputFolderPath = document.getElementById('python-output-folder-path').innerText;
+
+  const filePath = await window.electronAPI.generateCLOBotScript(blocksFolderPath, outputFolderPath, scriptOutputFolderPath);
 
   // Show progress for at least .5 seconds
   window.setTimeout(function() {

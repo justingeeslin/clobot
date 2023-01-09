@@ -6,8 +6,13 @@ const fs = require('fs');
 const exec = util.promisify(require('child_process').exec);
 var mainWindow;
 
-async function generateCLOBotScript() {
-  const { stdout, stderr } = await exec('whoami');
+async function generateCLOBotScript(e, blocksFolderPath, outputFolderPath, scriptOutputFolderPath) {
+  console.log('Testing arguments', blocksFolderPath, outputFolderPath, scriptOutputFolderPath);
+  const { stdout, stderr } = await exec('clobot.exe ' + 
+    blocksFolderPath + ' ' +
+    outputFolderPath + ' ' +
+    scriptOutputFolderPath
+  );
 
   if (stderr) {
     console.error(`error: ${stderr}`);
@@ -41,7 +46,7 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
