@@ -32,6 +32,27 @@ async function handleFileOpen() {
   }
 }
 
+async function getDefaultPaths() {
+  var macDefaultPaths = [
+    '/Applications/CLO_Network_OnlineAuth.app/Contents/Assets/Blocks/Woman/Polos',
+    'clobot/output',
+    'clobot/dist/clobot.py'
+  ];
+
+  var winDefaultPaths = [
+    'C:\\Users\Public\Documents\CLO\Assets\Blocks\Man\Polos',
+    'C:\\Users\Public\Documents\CLO',
+    'C:\\Users\Public\Documents\CLO\clobot.py'
+  ];
+
+  if (process.platform === 'darwin') {
+    return macDefaultPaths;
+  }
+  else {
+    return winDefaultPaths;
+  }
+}
+
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -46,7 +67,7 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
@@ -56,6 +77,7 @@ app.whenReady().then(() => {
   
   ipcMain.handle('generateCLOBotScript', generateCLOBotScript)
   ipcMain.handle('handleFileOpen', handleFileOpen)
+  ipcMain.handle('getDefaultPaths', getDefaultPaths)
 
   createWindow()
 

@@ -6,8 +6,17 @@
 // process.
 const btn = document.getElementById('btn')
 
+//Set default paths
+const defaultPathsPromise = window.electronAPI.getDefaultPaths();
+defaultPathsPromise.then((defaultPaths) => {
+  console.log('Default paths', defaultPaths);
+  document.getElementById('blocks-folder-path').innerText = defaultPaths[0];
+  document.getElementById('output-folder-path').innerText = defaultPaths[1];
+  document.getElementById('python-output-folder-path').innerText = defaultPaths[2];
+}).catch(err=>console.log(err))
 
-// Hide things initially
+
+// Hide progress bars initially
 document.getElementById('inprogress-msg').hidden = true;
 document.getElementById('complete-msg').hidden = true;
 
