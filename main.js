@@ -5,6 +5,7 @@ const util = require('util');
 const fs = require('fs');
 const exec = util.promisify(require('child_process').exec);
 var mainWindow;
+
 async function generateCLOBotScript() {
   const { stdout, stderr } = await exec('whoami');
 
@@ -16,8 +17,9 @@ async function generateCLOBotScript() {
 }
 
 async function handleFileOpen() {
-  console.log('choosing a folder..');
-  const { canceled, filePaths } = await dialog.showOpenDialog()
+  const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
+    properties: ['openDirectory']
+  })
   if (canceled) {
     return
   } else {;
