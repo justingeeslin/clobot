@@ -1,7 +1,7 @@
 {
   "name": "clobot-ui-electron",
   "productName": "clobot-ui-electron",
-  "description": "My Electron application description",
+  "description": "A GUI for CLOBot",
   "keywords": [],
   "main": "./main.js",
   "version": "1.0.0",

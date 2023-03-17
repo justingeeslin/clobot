@@ -64,8 +64,17 @@
             </div>
           </div>
           <div id="complete-msg">
-            COMPLETE! Follow the steps below:
-            File path: <strong id="filePath"></strong>
+            ✅ CLOBot has created a Python script for you to run inside of CLO! 
+            
+            <ol>
+              <li>Open CLO.</li>
+              <li>Go to <strong>Edit</strong>, then <strong>Python Script</strong></li>
+              <li>One line at a time, copy and paste the following lines into CLO's Python prompt.</li>
+            </ol>
+            
+            <pre><code id="path-append"></code></pre>
+            <pre><code>from clobot import CLOBot</code></pre>
+            <pre><code>CLOBot.go(mdsa)</code></pre>
           </div>
           
 
