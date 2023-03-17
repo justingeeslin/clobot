@@ -11,7 +11,7 @@
   <body>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Choose Garment Blocks</button>
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Choose Blocks &amp; Avatars</button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Export Options</button>
@@ -22,22 +22,28 @@
     </ul>
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-        <h1>Choose Blocks</h1>
-        <p>Choose the folders containing CLO assets, ex. Garment Blocks and the folder where the output should be saved.</p>
+        <h1>Choose Blocks &amp; Avatars</h1>
+        <p>Choose the folders containing CLO assets, Garment Blocks and avatars, and the folder where the output should be saved.</p>
 
         <div style="margin:0 auto;">
           <fieldset><legend>Garment Blocks folder:</legend>
             <input type="button" value="Browse…" name="blocks-folder" id="blocks-folder"/>
             <strong id="blocks-folder-path"></strong>
           </fieldset>
-          
-          
+
+          <br/>
+
+          <fieldset><legend>Avatars folder:</legend>
+            <input type="button" value="Browse…" name="avatars-folder" id="avatars-folder"/>
+            <strong id="avatars-folder-path"></strong>
+          </fieldset>
+
           <label style="display:none">Python script output folder:<br>
             <input type="button" value="Browse…" name="python-output-folder" id="python-output-folder"/>
             <strong id="python-output-folder-path"></strong>
           </label>
 
-          <br/>
+          <br/><br/>
 
           <fieldset><legend>Output folder:</legend>
           

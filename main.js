@@ -6,8 +6,8 @@ const fs = require('fs');
 const exec = util.promisify(require('child_process').exec);
 var mainWindow;
 
-async function generateCLOBotScript(e, blocksFolderPath, outputFolderPath, scriptOutputFolderPath) {
-  console.log('Testing arguments', blocksFolderPath, outputFolderPath, scriptOutputFolderPath);
+async function generateCLOBotScript(e, blocksFolderPath, avatarsFolderPath, outputFolderPath, scriptOutputFolderPath) {
+  console.log('Testing arguments', blocksFolderPath, avatarsFolderPath, outputFolderPath, scriptOutputFolderPath);
 
   var processName = path.join(app.getAppPath(), 'clobot/clobot.exe');
 
@@ -18,6 +18,7 @@ async function generateCLOBotScript(e, blocksFolderPath, outputFolderPath, scrip
   console.log('process name: ', processName)
   const { stdout, stderr } = await exec(processName + ' ' + 
     blocksFolderPath + ' ' +
+    avatarsFolderPath + ' ' +
     outputFolderPath + ' ' +
     scriptOutputFolderPath
   );
@@ -44,12 +45,14 @@ async function handleFileOpen() {
 async function getDefaultPaths() {
   var macDefaultPaths = [
     '/Applications/CLO_Network_OnlineAuth.app/Contents/Assets/Blocks/Woman/Polos',
+    '/Applications/CLO_Network_OnlineAuth.app/Contents/Assets/Avatar/Avatar',
     app.getPath("temp") + 'clobot/output',
     app.getPath("temp") + 'clobot.py'
   ];
 
   var winDefaultPaths = [
     'C:\\\\Users\\Public\\Documents\\CLO\\Assets\\Blocks\\Man\\Polos',
+    'C:\\\\Users\\Public\\Documents\\CLO\\Assets\\Avatar\\Avatar\\Female_V2',
     'C:\\\\Users\\Public\\Documents\\CLO',
     'C:\\\\Users\\Public\\Documents\\CLO\\clobot.py'
   ];
