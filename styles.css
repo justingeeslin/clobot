@@ -7,3 +7,6 @@
   body { background: #ddd; color: black; }
 }
 /* Add styles here to customize the appearance of your app */
+.tab-pane {
+  padding:1em;
+}
