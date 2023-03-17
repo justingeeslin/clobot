@@ -11,8 +11,9 @@ const defaultPathsPromise = window.electronAPI.getDefaultPaths();
 defaultPathsPromise.then((defaultPaths) => {
   console.log('Default paths', defaultPaths);
   document.getElementById('blocks-folder-path').innerText = defaultPaths[0];
-  document.getElementById('output-folder-path').innerText = defaultPaths[1];
-  document.getElementById('python-output-folder-path').innerText = defaultPaths[2];
+  document.getElementById('avatars-folder-path').innerText = defaultPaths[1];
+  document.getElementById('output-folder-path').innerText = defaultPaths[2];
+  document.getElementById('python-output-folder-path').innerText = defaultPaths[3];
 }).catch(err=>console.log(err))
 
 
@@ -26,10 +27,11 @@ btn.addEventListener('click', async () => {
 
   // Get the folder paths as arguments
   const blocksFolderPath = document.getElementById('blocks-folder-path').innerText;
+  const avatarsFolderPath = document.getElementById('avatars-folder-path').innerText;
   const outputFolderPath = document.getElementById('output-folder-path').innerText;
   const scriptOutputFolderPath = document.getElementById('python-output-folder-path').innerText;
 
-  const filePath = await window.electronAPI.generateCLOBotScript(blocksFolderPath, outputFolderPath, scriptOutputFolderPath);
+  const filePath = await window.electronAPI.generateCLOBotScript(blocksFolderPath, avatarsFolderPath, outputFolderPath, scriptOutputFolderPath);
 
   // Add the path append command to the UI since this varies on user input
   document.getElementById('path-append').innerText = 'sys.path.append(r"' + scriptOutputFolderPath.replace('\\clobot.py', '') + '")'
@@ -50,6 +52,13 @@ const inputFileBlocksFolder = document.getElementById('blocks-folder');
 inputFileBlocksFolder.addEventListener('click', async () => {
   const chosenDirectory = await window.electronAPI.handleFileOpen();
   const filePathElement = document.getElementById('blocks-folder-path')
+  filePathElement.innerText = chosenDirectory;
+})
+
+const inputAvatarsFolder = document.getElementById('avatars-folder');
+inputAvatarsFolder.addEventListener('click', async () => {
+  const chosenDirectory = await window.electronAPI.handleFileOpen();
+  const filePathElement = document.getElementById('avatars-folder-path')
   filePathElement.innerText = chosenDirectory;
 })
 

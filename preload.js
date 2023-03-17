@@ -5,7 +5,7 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  generateCLOBotScript: (arg1, arg2, arg3) => ipcRenderer.invoke('generateCLOBotScript', arg1, arg2, arg3),
+  generateCLOBotScript: (arg1, arg2, arg3, arg4) => ipcRenderer.invoke('generateCLOBotScript', arg1, arg2, arg3, arg4),
   getDefaultPaths: () => ipcRenderer.invoke('getDefaultPaths'),
   handleFileOpen: () => ipcRenderer.invoke('handleFileOpen')
 })
