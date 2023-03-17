@@ -9,7 +9,7 @@ var mainWindow;
 async function generateCLOBotScript(e, blocksFolderPath, outputFolderPath, scriptOutputFolderPath) {
   console.log('Testing arguments', blocksFolderPath, outputFolderPath, scriptOutputFolderPath);
 
-  var processName = 'clobot/clobot.exe';
+  var processName = path.join(app.getAppPath(), 'clobot/clobot.exe');
 
   // When testing on a mac, run the python script directly.
   if (process.platform === 'darwin') {
