@@ -32,7 +32,7 @@ btn.addEventListener('click', async () => {
   const filePath = await window.electronAPI.generateCLOBotScript(blocksFolderPath, outputFolderPath, scriptOutputFolderPath);
 
   // Add the path append command to the UI since this varies on user input
-  document.getElementById('path-append').innerText = 'sys.path.append(r"' + scriptOutputFolderPath.replace('/clobot.py', '') + '")'
+  document.getElementById('path-append').innerText = 'sys.path.append(r"' + scriptOutputFolderPath.replace('\\clobot.py', '') + '")'
 
   // Show progress for at least .5 seconds
   window.setTimeout(function() {

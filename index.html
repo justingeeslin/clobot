@@ -61,8 +61,8 @@
         <h1>Generate Script</h1>
 
         <div style="margin-bottom:1em;min-height:3em;">
-          <div>
-            <button type="button" id="btn">Generate Python script for CLO</button>
+          <div style="margin:1em;text-align:center;">
+            <button type="button" id="btn" style="padding:1em 2em;">Generate Python script for CLO</button>
           </div>
           <div id="inprogress-msg">
             Generating Python script for CLO…
@@ -79,9 +79,11 @@
               <li>One line at a time, copy and paste the following lines into CLO's Python prompt.</li>
             </ol>
             
-            <pre><code id="path-append"></code></pre>
-            <pre><code>from clobot import CLOBot</code></pre>
-            <pre><code>CLOBot.go(mdsa)</code></pre>
+            <code id="path-append"></code>
+            <hr>
+            <code>from clobot import CLOBot</code>
+            <hr>
+            <code>CLOBot.go(mdsa)</code>
           </div>
           
 

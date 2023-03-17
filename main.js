@@ -31,6 +31,7 @@ async function generateCLOBotScript(e, blocksFolderPath, outputFolderPath, scrip
 
 async function handleFileOpen() {
   const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
+    defaultPath: "C:\\\\Users\\Public\\Documents\\CLO\\Assets\\Blocks\\",
     properties: ['openDirectory']
   })
   if (canceled) {
@@ -48,9 +49,9 @@ async function getDefaultPaths() {
   ];
 
   var winDefaultPaths = [
-    'C:\\Users\Public\Documents\CLO\Assets\Blocks\Man\Polos',
-    'C:\\Users\Public\Documents\CLO',
-    'C:\\Users\Public\Documents\CLO\clobot.py'
+    'C:\\\\Users\\Public\\Documents\\CLO\\Assets\\Blocks\\Man\\Polos',
+    'C:\\\\Users\\Public\\Documents\\CLO',
+    'C:\\\\Users\\Public\\Documents\\CLO\\clobot.py'
   ];
 
   if (process.platform === 'darwin') {
