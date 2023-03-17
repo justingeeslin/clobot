@@ -13,9 +13,9 @@ async function generateCLOBotScript(e, blocksFolderPath, outputFolderPath, scrip
 
   // When testing on a mac, run the python script directly.
   if (process.platform === 'darwin') {
-    processName = 'python3 clobot/main.py';
+    processName = 'python3 ' + path.join(app.getAppPath(), 'clobot/main.py');
   }
-
+  console.log('process name: ', processName)
   const { stdout, stderr } = await exec(processName + ' ' + 
     blocksFolderPath + ' ' +
     outputFolderPath + ' ' +
