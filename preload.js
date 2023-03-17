@@ -1,5 +1,15 @@
+
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
+
+const { contextBridge, ipcRenderer } = require('electron')
+
+contextBridge.exposeInMainWorld('electronAPI', {
+  generateCLOBotScript: (arg1, arg2, arg3, arg4) => ipcRenderer.invoke('generateCLOBotScript', arg1, arg2, arg3, arg4),
+  getDefaultPaths: () => ipcRenderer.invoke('getDefaultPaths'),
+  handleFileOpen: () => ipcRenderer.invoke('handleFileOpen')
+})
+
 window.addEventListener('DOMContentLoaded', () => {
   const replaceText = (selector, text) => {
     const element = document.getElementById(selector)
@@ -11,17 +21,4 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 })
 
-/* BOOTSTRAP TABS */
-const triggerTabList = document.querySelectorAll('#myTab button')
-triggerTabList.forEach(triggerEl => {
-  const tabTrigger = new bootstrap.Tab(triggerEl)
 
-  triggerEl.addEventListener('click', event => {
-    event.preventDefault()
-    tabTrigger.show()
-  })
-})
-
-/* Custom function for nexting */
-const triggerEl = document.querySelector('#myTab button[data-bs-target="#profile"]')
-bootstrap.Tab.getInstance(triggerEl).show() 

@@ -1,10 +1,73 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const path = require('path')
+const util = require('util');
+const fs = require('fs');
+const exec = util.promisify(require('child_process').exec);
+var mainWindow;
+
+async function generateCLOBotScript(e, blocksFolderPath, avatarsFolderPath, outputFolderPath, scriptOutputFolderPath) {
+  console.log('Testing arguments', blocksFolderPath, avatarsFolderPath, outputFolderPath, scriptOutputFolderPath);
+
+  var processName = path.join(app.getAppPath(), 'clobot/clobot.exe');
+
+  // When testing on a mac, run the python script directly.
+  if (process.platform === 'darwin') {
+    processName = 'python3 ' + path.join(app.getAppPath(), 'clobot/main.py');
+  }
+  console.log('process name: ', processName)
+  const { stdout, stderr } = await exec(processName + ' ' + 
+    blocksFolderPath + ' ' +
+    avatarsFolderPath + ' ' +
+    outputFolderPath + ' ' +
+    scriptOutputFolderPath
+  );
+
+  if (stderr) {
+    console.error(`error: ${stderr}`);
+  }
+  console.log(`${stdout}`);
+  return stdout;
+}
+
+async function handleFileOpen() {
+  const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
+    defaultPath: "C:\\\\Users\\Public\\Documents\\CLO\\Assets\\Blocks\\",
+    properties: ['openDirectory']
+  })
+  if (canceled) {
+    return
+  } else {;
+    return filePaths[0]
+  }
+}
+
+async function getDefaultPaths() {
+  var macDefaultPaths = [
+    '/Applications/CLO_Network_OnlineAuth.app/Contents/Assets/Blocks/Woman/Polos',
+    '/Applications/CLO_Network_OnlineAuth.app/Contents/Assets/Avatar/Avatar',
+    app.getPath("temp") + 'clobot/output',
+    app.getPath("temp") + 'clobot.py'
+  ];
+
+  var winDefaultPaths = [
+    'C:\\\\Users\\Public\\Documents\\CLO\\Assets\\Blocks\\Man\\Polos',
+    'C:\\\\Users\\Public\\Documents\\CLO\\Assets\\Avatar\\Avatar\\Female_V2',
+    'C:\\\\Users\\Public\\Documents\\CLO',
+    'C:\\\\Users\\Public\\Documents\\CLO\\clobot.py'
+  ];
+
+  if (process.platform === 'darwin') {
+    return macDefaultPaths;
+  }
+  else {
+    return winDefaultPaths;
+  }
+}
 
 function createWindow () {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -23,6 +86,11 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  
+  ipcMain.handle('generateCLOBotScript', generateCLOBotScript)
+  ipcMain.handle('handleFileOpen', handleFileOpen)
+  ipcMain.handle('getDefaultPaths', getDefaultPaths)
+
   createWindow()
 
   app.on('activate', function () {

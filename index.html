@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
@@ -11,99 +11,92 @@
   <body>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Choose Blocks &amp; Avatars</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Export Options</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false">Progress</button>
+        <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false">Generate Script</button>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-        <h1>Hello World!</h1>
-        We are using Node.js <span id="node-version"></span>,
-        Chromium <span id="chrome-version"></span>,
-        and Electron <span id="electron-version"></span>.
+        <h1>Choose Blocks &amp; Avatars</h1>
+        <p>Choose the folders containing CLO assets, Garment Blocks and avatars, and the folder where the output should be saved.</p>
 
-        <button class="next">Next</button>
+        <div style="margin:0 auto;">
+          <fieldset><legend>Garment Blocks folder:</legend>
+            <input type="button" value="Browse…" name="blocks-folder" id="blocks-folder"/>
+            <strong id="blocks-folder-path"></strong>
+          </fieldset>
+
+          <br/>
+
+          <fieldset><legend>Avatars folder:</legend>
+            <input type="button" value="Browse…" name="avatars-folder" id="avatars-folder"/>
+            <strong id="avatars-folder-path"></strong>
+          </fieldset>
+
+          <label style="display:none">Python script output folder:<br>
+            <input type="button" value="Browse…" name="python-output-folder" id="python-output-folder"/>
+            <strong id="python-output-folder-path"></strong>
+          </label>
+
+          <br/><br/>
+
+          <fieldset><legend>Output folder:</legend>
+          
+            <input type="button" value="Browse…" name="output-folder" id="output-folder"/>
+            <strong id="output-folder-path"></strong>
+          
+        </div>
+        
+
+        <!-- <button class="next">Next</button> -->
       </div>
       <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-        <h1>Second Page</h1>
+        <h1>Export Options</h1>
 
-        <button class="next">Next</button>
-      </div>
-      <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-        <h1>Third Page</h1>
-
-        <button class="next">Next</button>
+        <input type="checkbox" id="obj" checked disabled> 
+        <label for="obj">Export 3D model (OBJ)</label>
+        
+        <!-- <button class="next">Next</button> -->
       </div>
       <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
-        <h1>Progress</h1>
+        <h1>Generate Script</h1>
 
-        <div class="accordion accordion-flush" id="accordionFlushExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                Step One - Blocks to Garments
-              </button>
-            </h2>
-            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">
-                
-                Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
-
-                <div class="progress">
-  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-</div>
-              
-              </div>
+        <div style="margin-bottom:1em;min-height:3em;">
+          <div style="margin:1em;text-align:center;">
+            <button type="button" id="btn" style="padding:1em 2em;">Generate Python script for CLO</button>
+          </div>
+          <div id="inprogress-msg">
+            Generating Python script for CLO…
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
             </div>
           </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingTwo">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                Step Two - Garments to Projects
-              </button>
-            </h2>
-            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-
-              <div class="accordion accordion-flush" id="accordionResultProjects">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#resultingProjects" aria-expanded="false" aria-controls="resultingProjects">
-                      View created projects
-                    </button>
-                  </h2>
-                  <div id="resultingProjects" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionResultProjects">
-                    <div class="accordion-body">
-                      Created project files will display here.
-                      </div>
-                  </div>
-                </div>
-
-</div>
-
-              
-            </div>
+          <div class="alert alert-success" role="alert" id="complete-msg" data-bs-theme="dark">
+            ✅ CLOBot has created a Python script for you to run inside of CLO! 
+            
+            <ol>
+              <li>Open CLO.</li>
+              <li>Go to <strong>Edit</strong>, then <strong>Python Script</strong></li>
+              <li>One line at a time, copy and paste the following lines into CLO's Python prompt.</li>
+            </ol>
+            
+            <code id="path-append"></code>
+            <hr>
+            <code>from clobot import CLOBot</code>
+            <hr>
+            <code>CLOBot.go(mdsa)</code>
           </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingThree">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                Step Three - Projects to Simulations
-              </button>
-            </h2>
-            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-            </div>
-          </div>
+          
+
         </div>
-    
+      </div>
+
+            
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
     <script src="./renderer.js"></script>

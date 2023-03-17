@@ -1,0 +1,7 @@
+# CLOBot 
+
+
+## Building
+```
+yarn make
+```
