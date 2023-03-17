@@ -43,8 +43,8 @@ async function handleFileOpen() {
 async function getDefaultPaths() {
   var macDefaultPaths = [
     '/Applications/CLO_Network_OnlineAuth.app/Contents/Assets/Blocks/Woman/Polos',
-    'clobot/output',
-    'clobot/dist/clobot.py'
+    app.getPath("temp") + 'clobot/output',
+    app.getPath("temp") + 'clobot.py'
   ];
 
   var winDefaultPaths = [
