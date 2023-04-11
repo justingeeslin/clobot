@@ -1,0 +1,10 @@
+# Python API Intrigue
+/The current approach brings it from impossible to possible. But it is slow! And error prone! It makes me want to wander back over to the API side just to make sure there isn’t something I’ve missed./
+/Now that I’m more familiar with modular configurator and its blocks, I notice an API function I didn’t see before./
+
+### Goals
+1. Can you load a mod config block via API and export? Yes!
+	1. Export code? Yes!
+2. Can you open a local python script from inside CLO? yes
+
+/Breakthrough! Let’s do this. This is way better than trying to wrangle OS differences and drive the UI./

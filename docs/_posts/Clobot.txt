@@ -1,0 +1,3 @@
+# Clobot
+Good example of overlays and python ocr
+https://github.com/ianzhao05/textshot

@@ -1,0 +1,12 @@
+# CLO macros
+*PyAutoGUI* - Driving the UI, using images to drive the UI could be critical for driving the modular configurator  - https://pyautogui.readthedocs.io/en/latest/
+
+*PyInstaller* - Convert a python script to an app - https://pyinstaller.org/en/stable/operating-mode.html
+
+
+https://www.geeksforgeeks.org/mouse-keyboard-automation-using-python/
+
+### Alternatives
+QT specific - https://github.com/faaxm/spix
+
+If pyautogui fails - https://learncodebygaming.com/blog/pyautogui-not-working-use-directinput

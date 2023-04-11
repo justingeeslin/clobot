@@ -1,0 +1,2 @@
+# CloBot UI
+Consider a native UI framework for Windows. You want to run a python script converted to EXE via pyinstaller. 
